@@ -1,6 +1,7 @@
 // src/components/NavBar/NavBar.jsx
 import { useContext } from "react";
 import { Link } from "react-router";
+import './NavBar.css'
 
 import { UserContext } from "../../contexts/UserContext";
 
@@ -22,22 +23,34 @@ const NavBar = () => {
   }
 
   return (
-<nav>
-      {user ? (
-        <ul>
-          <li>Hello, {user.username}</li>
-          {/* The new link */}
-          <li><Link to='/'>Dashboard</Link></li>
-          <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
-        </ul>
-      ) : (
-        <ul>
-          {/* Another new link */}
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/sign-in'>Sign In</Link></li>
-          <li><Link to='/sign-up'>Sign Up</Link></li>
-        </ul>
-      )}
+    <nav className="navbar">
+      <div className="nav-container">
+        {/* Left Section - Greeting */}
+        {user && (
+          <div className="nav-left">
+            <span className="nav-greeting">Hello, {user.username}</span>
+          </div>
+        )}
+
+        {/* Center Section - App Name */}
+        <div className="nav-center">
+          <span className="nav-title">CODE_tracker</span>
+        </div>
+
+        {/* Right Section - Dashboard & Sign Out */}
+        {user ? (
+          <div className="nav-right">
+            <Link to="/" className="nav-dashboard">Dashboard</Link>
+            <button className="nav-signout" onClick={handleSignOut}>Sign Out</button>
+          </div>
+        ) : (
+          <div className="nav-right">
+            <Link to="/">Home</Link>
+            <Link to="/sign-in">Sign In</Link>
+            <Link to="/sign-up">Sign Up</Link>
+          </div>
+        )}
+      </div>
     </nav>
   );
 };

@@ -53,7 +53,7 @@ const updateProject = async (projectFormData, projectId) => {
 
 const deleteProject = async (projectId) => {
   try {
-    const response = await fetch(BASE_URL + `/${projectId}`, {
+    const response = await fetch(`${BASE_URL}/${projectId}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     });
@@ -66,10 +66,60 @@ const deleteProject = async (projectId) => {
   }
 };
 
+const createTask = async (projectId, taskFormData) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${projectId}/tasks`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(taskFormData),
+    });
+    return response.json();
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+const updateTask = async (projectId, taskId, taskFormData) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${projectId}/tasks/${taskId}`, {
+      method: 'PUT',
+      headers: { 
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}` 
+      },
+      body: JSON.stringify(taskFormData)
+    });
+
+    return response.json();
+
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+const deleteTask = async (projectId, taskId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${projectId}/tasks/${taskId}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+
+    const deletedTask = await response.json();
+    return deletedTask;
+  } catch(err) {
+    console.log(err);
+  }
+}
 
 export { 
   index, 
   create,
   updateProject, 
   deleteProject,
+  createTask,
+  deleteTask, 
+  updateTask,
 }

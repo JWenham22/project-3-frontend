@@ -6,6 +6,7 @@ import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import Dashboard from './components/Dashboard/Dashboard';
 import Landing from './components/Landing/Landing';
+// import ProjectDetails from './components/ProjectDetails/ProjectDetails';
 
 import { UserContext } from './contexts/UserContext';
 const App = () => {
